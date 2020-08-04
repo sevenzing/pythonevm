@@ -6,7 +6,7 @@ Todo
 ### 2. How to use it?
 Todo
 ### 3. Testing
-Test using framework `pytest`:
+You can test it using framework `pytest`:
 
     $ python3 -m pip install pytest
     $ python3 -m pytest
