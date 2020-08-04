@@ -2,11 +2,6 @@
 from math import ceil
 from pythonevm.numbers import *
 
-def printError(message):
-    print(f"Error: {message}")
-    exit()
-
-
 class Stack:
     def __init__(self, size=256):
 
@@ -38,10 +33,8 @@ class Stack:
         else:
             return self.__stk.pop(0)
 
-    #
     # The same functions, but without add/remove and with indexes
-    #
-
+    
     def setElement(self, index, value):
         value = toTwosComplement(value, self.size)
         self.__stk[index] = value

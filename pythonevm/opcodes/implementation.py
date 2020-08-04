@@ -197,7 +197,6 @@ def _sstore(vm):
 
 @opcode_tag(name='JUMP')
 def _jump(vm, destination=None):
-    print('-------------==')
     if destination == None:
         destination = vm.stack.popTop()
     if vm.code[destination] != 0x5b:
@@ -207,7 +206,6 @@ def _jump(vm, destination=None):
 @opcode_tag(name='JUMPI')
 def _jumpi(vm):
     destination, condition = vm.stack.popTop(), vm.stack.popTop()
-    print('--'*40)
     if condition:
         _jump(vm, destination)
     

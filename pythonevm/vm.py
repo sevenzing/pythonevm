@@ -1,10 +1,10 @@
 from opcodes.names import opcode_names
 import opcodes.implementation 
-
 from opcodes import IMPLEMENTED_OPCODES
-from utils import Stack, Memory, OpcodeNotImplemented, OpcodeNotFound
+from utils import Stack, Memory, OpcodeNotImplemented, OpcodeNotFound, log
 
 import re
+
 
 
 class VM:
@@ -21,11 +21,16 @@ class VM:
         self.code = None
         self.msg = None
         self.code = None
-        
+
+        self.debug = False 
         self.pc = 0
         self.prev_pc = -1
         self.stop = False
-        
+    
+    def log(self, message):
+        if self.debug:
+            print(message)
+
     def __str__(self, executed=False):
         if executed:
             _str = str(self.stack) + '\n' + str(self.memory)
@@ -47,6 +52,7 @@ class VM:
 
         else:
            pass
+    
 
     def execute(self, code: bytearray, msg: bytearray, debug=False):
         '''
@@ -59,7 +65,7 @@ class VM:
         '''
         self.code = code
         self.msg = msg
-
+        self.debug = debug
         while not self.stop:
             self.pc_moved = False
 
@@ -73,13 +79,14 @@ class VM:
             
             self.current_opcode_name = opcode_names[self.opcode]
             
-            print(self.__str__())
+            self.log(self.__str__())
             # running opcode
             result = self.execute_opcode(self.current_opcode_name)
             if result:
                 return result
 
-            print(self.__str__(executed=True), end='\n\n')
+            self.log(self.__str__(executed=True), end='\n\n')
+            
             # pc move
             self.make_pc_move(shift=1)            
             
