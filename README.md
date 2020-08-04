@@ -15,7 +15,7 @@ Test using framework `pytest`:
 #### One plus two
 
 ```python3
-from pythonenv.vm import VM
+from pythonevm.vm import VM
 vm = VM()
 
 # put 2 on the stack, 
